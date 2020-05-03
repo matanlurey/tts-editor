@@ -24,6 +24,5 @@
   // Lint.
   "eslint.validate": ["javascript", "json", "typescript"],
   "eslint.lintTask.enable": true,
-  "eslint.nodePath": "vendor/node/node",
   "editor.tabSize": 2
 }
