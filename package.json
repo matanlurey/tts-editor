@@ -4,8 +4,8 @@
   "description": "Node interface to the Tabletop Simulator External Editor API",
   "scripts": {
     "build": "tsc",
-    "fix": "prettier --write . --ignore-path .gitignore && eslint --fix .",
-    "lint": "prettier --ignore-path .gitignore --list-different . && eslint .",
+    "fix": "prettier --write . --ignore-path .gitignore && eslint --fix src/** test/**",
+    "lint": "prettier --ignore-path .gitignore --list-different src test && eslint src/** test/**",
     "test": "jest"
   },
   "repository": {
