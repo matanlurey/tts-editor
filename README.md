@@ -4,9 +4,14 @@ A Node.js implementation of the [External Editor API][1] for Tabletop Simulator.
 
 This is intended to make it easier to write development tools and plugins
 intead of using the built-in script editor or the [Official Atom Plugin][2] for
-Tabletop Simulator.
+Tabletop Simulator. There are two classes provided by this API -
+[ExternalEditorApi](#externaleditorapi) and [TTSApiBackend](#ttsapibackend).
 
 ## `ExternalEditorApi`
+
+This is the client/server representing the _editor_. You can listen for
+connections from an active instance of Tabletop Simulator, and send messages
+to an active instance.
 
 ```ts
 (async () => {
@@ -15,6 +20,7 @@ Tabletop Simulator.
   await api.listen();
 
   // You are now ready to send/receive messages.
+  await api.executeLuaCode('print("Hello, World")');
 })();
 ```
 
