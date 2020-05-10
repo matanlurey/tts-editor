@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    // Emits d.ts definition files along with compiled JS.
+    "declaration": true,
+
+    // Enables interopability between CommonJS and ES Modules.
+    //
+    // This does not effect the code that is emitted, but rather allows
+    // typechecking of packages that use an older module format.
+    "esModuleInterop": true,
+
+    // Require checked-in TypeScript code to pass a higher bar/be consistent.
+    "strict": true,
+
+    // Support super() call.
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "dist"
+  },
+
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Node interface to the Tabletop Simulator External Editor API",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build tsconfig.dist.json && ts-node tool/postbuild.ts",
     "fix": "prettier --write . --ignore-path .gitignore && eslint --fix src/** test/**",
     "lint": "prettier --ignore-path .gitignore --list-different src test && eslint src/** test/**",
     "test": "jest"
@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/matanlurey/tts-editor.git"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "author": "Matan Lurey",
   "keywords": [
     "Tabletop",
@@ -23,6 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.2.1",
+    "@types/shelljs": "^0.8.7",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
@@ -32,6 +33,7 @@
     "jest": "^25.5.4",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
+    "shelljs": "^0.8.4",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
