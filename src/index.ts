@@ -287,10 +287,8 @@ export default class ExternalEditorApi extends Emittery.Typed<
   private send<T extends number>(message: JsonMessage<T>): Promise<void> {
     const client = new Socket();
     return new Promise((resolve, reject) => {
-      client.once('error', () => {
-        reject();
-      });
-      client.connect(this.clientPort, () => {
+      client.once('error', reject);
+      client.connect(this.clientPort, '127.0.0.1', () => {
         client.write(JSON.stringify(message), (error) => {
           if (error) {
             reject(error);

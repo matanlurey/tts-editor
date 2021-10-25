@@ -1,6 +1,6 @@
 {
   "name": "@matanlurey/tts-editor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node interface to the Tabletop Simulator External Editor API",
   "scripts": {
     "build": "tsc --build tsconfig.dist.json && ts-node tool/postbuild.ts",
