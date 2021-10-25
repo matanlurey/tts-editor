@@ -3,7 +3,7 @@
     // Emits d.ts definition files along with compiled JS.
     "declaration": true,
 
-    // Enables interopability between CommonJS and ES Modules.
+    // Enables interoperability between CommonJS and ES Modules.
     //
     // This does not effect the code that is emitted, but rather allows
     // typechecking of packages that use an older module format.

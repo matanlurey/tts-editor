@@ -93,7 +93,7 @@ export interface ExecuteLuaCode extends JsonMessage<3> {
 }
 
 /**
- * When an object is right clicekd (contextual menu) -> `Scripting Editor`.
+ * When an object is right clicked (contextual menu) -> `Scripting Editor`.
  *
  * @see https://api.tabletopsimulator.com/externaleditorapi/#pushing-new-object.
  */
@@ -142,7 +142,7 @@ export interface ErrorMessage extends JsonMessage<3> {
 }
 
 /**
- * All custom mesages sent via `sendExternalMessage`. Useful for developing.
+ * All custom messages sent via `sendExternalMessage`. Useful for developing.
  *
  * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-messages.
  */
@@ -236,7 +236,7 @@ export default class ExternalEditorApi extends Emittery.Typed<
         if (address) {
           resolve(address.port);
         } else {
-          resolve();
+          resolve(undefined);
         }
         this.server.on('connection', (socket) => {
           socket.on('data', this.onDataReceived.bind(this));
@@ -320,7 +320,7 @@ export default class ExternalEditorApi extends Emittery.Typed<
    * Updates the Lua and/or XML UI for the provided objects.
    *
    * Any objects mentioned will have their Lua script and their XML UI updated.
-   * If no value is set, then the cooresponding Lua script or XML UI is deleted
+   * If no value is set, then the corresponding Lua script or XML UI is deleted
    * for the provided GUID.
    *
    * @see https://api.tabletopsimulator.com/externaleditorapi/#save-play
@@ -411,7 +411,7 @@ export class TTSApiBackend extends Emittery.Typed<
         if (address) {
           resolve(address.port);
         } else {
-          resolve();
+          resolve(undefined);
         }
         this.server.on('connection', (socket) => {
           socket.on('data', this.onDataReceived.bind(this));
