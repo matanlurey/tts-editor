@@ -1,6 +1,6 @@
 {
   "name": "@matanlurey/tts-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node interface to the Tabletop Simulator External Editor API",
   "scripts": {
     "build": "tsc --build tsconfig.dist.json && ts-node tool/postbuild.ts",
@@ -22,21 +22,21 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^27.0.2",
     "@types/shelljs": "^0.8.7",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-prettier": "^3.1.3",
-    "jest": "^25.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "shelljs": "^0.8.4",
-    "ts-jest": "^25.4.0",
-    "ts-node": "^8.9.1",
-    "typescript": "^3.8.3"
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "emittery": "^0.6.0"

@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TTSApiBackend = void 0;
 const emittery_1 = __importDefault(require("emittery"));
 const net_1 = require("net");
 /**
@@ -37,7 +38,7 @@ class ExternalEditorApi extends emittery_1.default.Typed {
                     resolve(address.port);
                 }
                 else {
-                    resolve();
+                    resolve(undefined);
                 }
                 this.server.on('connection', (socket) => {
                     socket.on('data', this.onDataReceived.bind(this));
@@ -119,7 +120,7 @@ class ExternalEditorApi extends emittery_1.default.Typed {
      * Updates the Lua and/or XML UI for the provided objects.
      *
      * Any objects mentioned will have their Lua script and their XML UI updated.
-     * If no value is set, then the cooresponding Lua script or XML UI is deleted
+     * If no value is set, then the corresponding Lua script or XML UI is deleted
      * for the provided GUID.
      *
      * @see https://api.tabletopsimulator.com/externaleditorapi/#save-play
@@ -192,7 +193,7 @@ class TTSApiBackend extends emittery_1.default.Typed {
                     resolve(address.port);
                 }
                 else {
-                    resolve();
+                    resolve(undefined);
                 }
                 this.server.on('connection', (socket) => {
                     socket.on('data', this.onDataReceived.bind(this));

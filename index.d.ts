@@ -65,7 +65,7 @@ export interface SaveAndPlay extends JsonMessage<1> {
  * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-message.
  */
 export interface SendCustomMessage extends JsonMessage<2> {
-    customMessage: {};
+    customMessage: unknown;
 }
 /**
  * Tells Tabletop Simulator to execute the provided Lua script.
@@ -80,7 +80,7 @@ export interface ExecuteLuaCode extends JsonMessage<3> {
     script: string;
 }
 /**
- * When an object is right clicekd (contextual menu) -> `Scripting Editor`.
+ * When an object is right clicked (contextual menu) -> `Scripting Editor`.
  *
  * @see https://api.tabletopsimulator.com/externaleditorapi/#pushing-new-object.
  */
@@ -123,12 +123,12 @@ export interface ErrorMessage extends JsonMessage<3> {
     errorMessagePrefix: string;
 }
 /**
- * All custom mesages sent via `sendExternalMessage`. Useful for developing.
+ * All custom messages sent via `sendExternalMessage`. Useful for developing.
  *
  * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-messages.
  */
 export interface CustomMessage extends JsonMessage<4> {
-    customMessage: {};
+    customMessage: unknown;
 }
 /**
  * The result of executing Lua code.
@@ -198,7 +198,7 @@ export default class ExternalEditorApi extends Emittery.Typed<{
      * Updates the Lua and/or XML UI for the provided objects.
      *
      * Any objects mentioned will have their Lua script and their XML UI updated.
-     * If no value is set, then the cooresponding Lua script or XML UI is deleted
+     * If no value is set, then the corresponding Lua script or XML UI is deleted
      * for the provided GUID.
      *
      * @see https://api.tabletopsimulator.com/externaleditorapi/#save-play
@@ -209,13 +209,13 @@ export default class ExternalEditorApi extends Emittery.Typed<{
      *
      * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-message
      */
-    customMessage(customMessage: {}): Promise<void>;
+    customMessage(customMessage: unknown): Promise<void>;
     /**
      * Executes the provided Lua code for the associated GUID.
      *
      * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code
      */
-    executeLuaCode<T>(script: string, guid?: string): Promise<void>;
+    executeLuaCode(script: string, guid?: string): Promise<void>;
     executeLuaCodeAndReturn<T>(script: string, guid?: string): Promise<T>;
 }
 export declare type SentEventNames = 'getLuaScripts' | 'saveAndPlay' | 'customMessage' | 'executeLuaCode';
@@ -244,7 +244,7 @@ export declare class TTSApiBackend extends Emittery.Typed<{
     loadNewGame(scriptStates: IncomingJsonObject[]): Promise<void>;
     printDebugMessage(text: string): Promise<void>;
     errorMessage(error: string, errorMessagePrefix: string, guid?: string): Promise<void>;
-    customMessage(customMessage: {}): Promise<void>;
+    customMessage(customMessage: unknown): Promise<void>;
     returnMessage(returnValue: unknown): Promise<void>;
     gameSaved(): Promise<void>;
     objectCreated(guid: string): Promise<void>;
