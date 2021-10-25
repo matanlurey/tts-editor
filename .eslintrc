@@ -8,10 +8,6 @@
   "env": {
     "node": true
   },
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
-  ],
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
   "plugins": ["import", "prettier", "@typescript-eslint"]
 }

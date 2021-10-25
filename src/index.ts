@@ -76,7 +76,7 @@ export interface SaveAndPlay extends JsonMessage<1> {
  * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-message.
  */
 export interface SendCustomMessage extends JsonMessage<2> {
-  customMessage: {};
+  customMessage: unknown;
 }
 
 /**
@@ -147,7 +147,7 @@ export interface ErrorMessage extends JsonMessage<3> {
  * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-messages.
  */
 export interface CustomMessage extends JsonMessage<4> {
-  customMessage: {};
+  customMessage: unknown;
 }
 
 /**
@@ -341,7 +341,7 @@ export default class ExternalEditorApi extends Emittery.Typed<
    *
    * @see https://api.tabletopsimulator.com/externaleditorapi/#custom-message
    */
-  public async customMessage(customMessage: {}): Promise<void> {
+  public async customMessage(customMessage: unknown): Promise<void> {
     const message: SendCustomMessage = {
       messageID: 2,
       customMessage,
@@ -354,7 +354,7 @@ export default class ExternalEditorApi extends Emittery.Typed<
    *
    * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code
    */
-  public async executeLuaCode<T>(script: string, guid = '-1'): Promise<void> {
+  public async executeLuaCode(script: string, guid = '-1'): Promise<void> {
     const message: ExecuteLuaCode = {
       messageID: 3,
       script,
@@ -511,7 +511,7 @@ export class TTSApiBackend extends Emittery.Typed<
     return this.send(message);
   }
 
-  public customMessage(customMessage: {}): Promise<void> {
+  public customMessage(customMessage: unknown): Promise<void> {
     const message: CustomMessage = {
       messageID: 4,
       customMessage,
