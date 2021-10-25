@@ -86,10 +86,8 @@ class ExternalEditorApi extends emittery_1.default.Typed {
     send(message) {
         const client = new net_1.Socket();
         return new Promise((resolve, reject) => {
-            client.once('error', () => {
-                reject();
-            });
-            client.connect(this.clientPort, () => {
+            client.once('error', reject);
+            client.connect(this.clientPort, '127.0.0.1', () => {
                 client.write(JSON.stringify(message), (error) => {
                     if (error) {
                         reject(error);
