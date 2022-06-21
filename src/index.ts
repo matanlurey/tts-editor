@@ -239,7 +239,13 @@ export default class ExternalEditorApi extends Emittery.Typed<
           resolve(undefined);
         }
         this.server.on('connection', (socket) => {
-          socket.on('data', this.onDataReceived.bind(this));
+          const chunks: Buffer[] = [];
+          socket.on('data', (data: Buffer) => {
+            chunks.push(data);
+          });
+          socket.on('end', () => {
+            this.onDataReceived(Buffer.concat(chunks).toString('utf-8'));
+          });
         });
       });
     });
@@ -254,8 +260,8 @@ export default class ExternalEditorApi extends Emittery.Typed<
     this.server.close();
   }
 
-  private onDataReceived(data: Buffer): void {
-    const message = JSON.parse(data.toString('utf8')) as ReceivedEventTypes;
+  private onDataReceived(data: string): void {
+    const message = JSON.parse(data) as ReceivedEventTypes;
     switch (message.messageID) {
       case 0:
         this.emit('pushingNewObject', message);
