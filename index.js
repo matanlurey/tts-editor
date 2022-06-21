@@ -41,7 +41,13 @@ class ExternalEditorApi extends emittery_1.default.Typed {
                     resolve(undefined);
                 }
                 this.server.on('connection', (socket) => {
-                    socket.on('data', this.onDataReceived.bind(this));
+                    const chunks = [];
+                    socket.on('data', (data) => {
+                        chunks.push(data);
+                    });
+                    socket.on('end', () => {
+                        this.onDataReceived(Buffer.concat(chunks).toString('utf-8'));
+                    });
                 });
             });
         });
@@ -55,7 +61,7 @@ class ExternalEditorApi extends emittery_1.default.Typed {
         this.server.close();
     }
     onDataReceived(data) {
-        const message = JSON.parse(data.toString('utf8'));
+        const message = JSON.parse(data);
         switch (message.messageID) {
             case 0:
                 this.emit('pushingNewObject', message);
