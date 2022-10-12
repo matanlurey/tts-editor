@@ -47,6 +47,8 @@ test('should receive pushingNewObject', async () => {
 test('should receive pushingNewObject', async () => {
   const data: LoadingANewGame = {
     messageID: 1,
+    savePath:
+      'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
     scriptStates: [
       {
         name: 'Global',
@@ -97,6 +99,7 @@ test('should receive customMessage', async () => {
 test('should receive returnMessage', async () => {
   const data: ReturnMessage = {
     messageID: 5,
+    returnID: 0,
     returnValue: true,
   };
   expect(client.once('returnMessage')).resolves.toEqual(data);
@@ -120,6 +123,8 @@ test('should receive objectCreated', async () => {
 test('should send getLuaScripts', async () => {
   const outgoing: LoadingANewGame = {
     messageID: 1,
+    savePath:
+      'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
     scriptStates: [
       {
         name: 'Global',
@@ -158,6 +163,8 @@ test('should send saveAndPlay', async () => {
   };
   const outgoing: LoadingANewGame = {
     messageID: 1,
+    savePath:
+      'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
     scriptStates: [
       {
         name: 'Global',

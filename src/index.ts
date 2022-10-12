@@ -492,6 +492,8 @@ export class TTSApiBackend extends Emittery.Typed<
   public loadNewGame(scriptStates: IncomingJsonObject[]): Promise<void> {
     const message: LoadingANewGame = {
       messageID: 1,
+      savePath:
+        'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
       scriptStates,
     };
     return this.send(message);
@@ -530,6 +532,7 @@ export class TTSApiBackend extends Emittery.Typed<
   public returnMessage(returnValue: unknown): Promise<void> {
     const message: ReturnMessage = {
       messageID: 5,
+      returnID: 0,
       returnValue,
     };
     return this.send(message);
@@ -538,6 +541,8 @@ export class TTSApiBackend extends Emittery.Typed<
   public gameSaved(): Promise<void> {
     const message: GameSaved = {
       messageID: 6,
+      savePath:
+        'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
     };
     return this.send(message);
   }
