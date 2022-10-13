@@ -88,6 +88,7 @@ export interface SendCustomMessage extends JsonMessage<2> {
  * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code.
  */
 export interface ExecuteLuaCode extends JsonMessage<3> {
+  returnID: number;
   guid: string;
   script: string;
 }
@@ -362,9 +363,14 @@ export default class ExternalEditorApi extends Emittery.Typed<
    *
    * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code
    */
-  public async executeLuaCode(script: string, guid = '-1'): Promise<void> {
+  public async executeLuaCode(
+    script: string,
+    guid = '-1',
+    returnID = 0,
+  ): Promise<void> {
     const message: ExecuteLuaCode = {
       messageID: 3,
+      returnID,
       script,
       guid,
     };
@@ -374,8 +380,9 @@ export default class ExternalEditorApi extends Emittery.Typed<
   public async executeLuaCodeAndReturn<T>(
     script: string,
     guid = '-1',
+    returnID = 0,
   ): Promise<T> {
-    await this.executeLuaCode(script, guid);
+    await this.executeLuaCode(script, guid, returnID);
     return this.once('returnMessage').then((v) => v.returnValue as T);
   }
 }

@@ -201,6 +201,7 @@ test('should send customMessage', async () => {
 test('should send executeLuaCode', async () => {
   const data: ExecuteLuaCode = {
     messageID: 3,
+    returnID: 0,
     guid: '-1',
     script: 'print("Hello, World")',
   };
