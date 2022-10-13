@@ -88,6 +88,7 @@ export interface SendCustomMessage extends JsonMessage<2> {
  * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code.
  */
 export interface ExecuteLuaCode extends JsonMessage<3> {
+  returnID: number;
   guid: string;
   script: string;
 }
@@ -108,6 +109,7 @@ export interface PushingNewObject extends JsonMessage<0> {
  */
 export interface LoadingANewGame extends JsonMessage<1> {
   scriptStates: IncomingJsonObject[];
+  savePath: string; // Undocumented
 }
 
 /**
@@ -157,6 +159,7 @@ export interface CustomMessage extends JsonMessage<4> {
  */
 export interface ReturnMessage extends JsonMessage<5> {
   returnValue: unknown;
+  returnID: number; // Undocumented
 }
 
 /**
@@ -164,7 +167,9 @@ export interface ReturnMessage extends JsonMessage<5> {
  *
  * @see https://api.tabletopsimulator.com/externaleditorapi/#return-messages.
  */
-export type GameSaved = JsonMessage<6>;
+export interface GameSaved extends JsonMessage<6> {
+  savePath: string; // Undocumented
+}
 
 /**
  * Occurs whenever an object is created.
@@ -358,9 +363,14 @@ export default class ExternalEditorApi extends Emittery.Typed<
    *
    * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code
    */
-  public async executeLuaCode(script: string, guid = '-1'): Promise<void> {
+  public async executeLuaCode(
+    script: string,
+    guid = '-1',
+    returnID = 0,
+  ): Promise<void> {
     const message: ExecuteLuaCode = {
       messageID: 3,
+      returnID,
       script,
       guid,
     };
@@ -370,8 +380,9 @@ export default class ExternalEditorApi extends Emittery.Typed<
   public async executeLuaCodeAndReturn<T>(
     script: string,
     guid = '-1',
+    returnID = 0,
   ): Promise<T> {
-    await this.executeLuaCode(script, guid);
+    await this.executeLuaCode(script, guid, returnID);
     return this.once('returnMessage').then((v) => v.returnValue as T);
   }
 }
@@ -488,6 +499,8 @@ export class TTSApiBackend extends Emittery.Typed<
   public loadNewGame(scriptStates: IncomingJsonObject[]): Promise<void> {
     const message: LoadingANewGame = {
       messageID: 1,
+      savePath:
+        'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
       scriptStates,
     };
     return this.send(message);
@@ -526,6 +539,7 @@ export class TTSApiBackend extends Emittery.Typed<
   public returnMessage(returnValue: unknown): Promise<void> {
     const message: ReturnMessage = {
       messageID: 5,
+      returnID: 0,
       returnValue,
     };
     return this.send(message);
@@ -534,6 +548,8 @@ export class TTSApiBackend extends Emittery.Typed<
   public gameSaved(): Promise<void> {
     const message: GameSaved = {
       messageID: 6,
+      savePath:
+        'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
     };
     return this.send(message);
   }
